@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=1120, initial-scale=1" name="viewport"/>
+<title>Panimalar MBA FinTech Lab — Live Scrolling Stock Prices</title>
+<style>
+:root{color-scheme:dark;--green:#22e6a0;--red:#ff617b}
+*{box-sizing:border-box}
+html,body{width:1120px;height:40px;margin:0;padding:0;overflow:hidden;background:#071222;color:#f7f9ff;font-family:Arial,Helvetica,sans-serif}
+body{display:block}
+.ticker{position:relative;width:1120px;height:40px;overflow:hidden;white-space:nowrap;background:#071222;border:0;display:flex;align-items:center}
+.track{display:flex;flex:none;width:max-content;align-items:center;animation:marquee var(--duration,250s) linear infinite;will-change:transform}
+.sequence{display:flex;flex:none;align-items:center}
+.stock{flex:none;display:inline-flex;align-items:center;white-space:nowrap;gap:9px;margin-right:32px;font-size:18px;line-height:40px;font-variant-numeric:tabular-nums}
+.stock strong{font-weight:800}.stock .price{font-weight:500}.change{font-weight:800}.up{color:var(--green)}.down{color:var(--red)}.flat{color:#a9b8cf}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style></head><body>
+<div aria-label="Scrolling Nifty 50 stock prices" class="ticker">
+<div class="track" id="track"><div class="sequence">
+<span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><b class="change up">▲ 0.42%</b></span>
+<span class="stock" data-symbol="SBIN"><strong>SBIN</strong><span class="price">₹1,143.25</span><b class="change up">▲ 0.73%</b></span>
+<span class="stock" data-symbol="MARUTI"><strong>MARUTI</strong><span class="price">₹13,451.00</span><b class="change up">▲ 6.48%</b></span>
+<span class="stock" data-symbol="ICICIBANK"><strong>ICICIBANK</strong><span class="price">₹1,594.60</span><b class="change down">▼ 0.42%</b></span>
+<span class="stock" data-symbol="M&amp;M"><strong>M&amp;M</strong><span class="price">₹3,508.40</span><b class="change up">▲ 4.44%</b></span>
+<span class="stock" data-symbol="ETERNAL"><strong>ETERNAL</strong><span class="price">₹361.55</span><b class="change down">▼ 1.22%</b></span>
+<span class="stock" data-symbol="HDFCBANK"><strong>HDFCBANK</strong><span class="price">₹809.45</span><b class="change up">▲ 0.16%</b></span>
+<span class="stock" data-symbol="RELIANCE"><strong>RELIANCE</strong><span class="price">₹1,360.70</span><b class="change down">▼ 0.17%</b></span>
+<span class="stock" data-symbol="BHARTIARTL"><strong>BHARTIARTL</strong><span class="price">₹2,139.50</span><b class="change up">▲ 0.35%</b></span>
+<span class="stock" data-symbol="INFY"><strong>INFY</strong><span class="price">₹1,084.20</span><b class="change down">▼ 2.22%</b></span>
+<span class="stock" data-symbol="AXISBANK"><strong>AXISBANK</strong><span class="price">₹1,369.50</span><b class="change up">▲ 0.70%</b></span>
+<span class="stock" data-symbol="HINDALCO"><strong>HINDALCO</strong><span class="price">₹903.95</span><b class="change up">▲ 0.44%</b></span>
+<span class="stock" data-symbol="BSE"><strong>BSE</strong><span class="price">₹3,772.00</span><b class="change up">▲ 0.43%</b></span>
+<span class="stock" data-symbol="EICHERMOT"><strong>EICHERMOT</strong><span class="price">₹8,057.50</span><b class="change up">▲ 4.64%</b></span>
+<span class="stock" data-symbol="BAJFINANCE"><strong>BAJFINANCE</strong><span class="price">₹1,099.95</span><b class="change up">▲ 0.56%</b></span>
+<span class="stock" data-symbol="TMPV"><strong>TMPV</strong><span class="price">₹263.00</span><b class="change up">▲ 4.14%</b></span>
+<span class="stock" data-symbol="TITAN"><strong>TITAN</strong><span class="price">₹4,660.00</span><b class="change up">▲ 0.26%</b></span>
+<span class="stock" data-symbol="ITC"><strong>ITC</strong><span class="price">₹298.30</span><b class="change up">▲ 0.57%</b></span>
+<span class="stock" data-symbol="TCS"><strong>TCS</strong><span class="price">₹2,358.70</span><b class="change down">▼ 0.87%</b></span>
+<span class="stock" data-symbol="LT"><strong>LT</strong><span class="price">₹4,166.40</span><b class="change up">▲ 0.18%</b></span>
+<span class="stock" data-symbol="SHRIRAMFIN"><strong>SHRIRAMFIN</strong><span class="price">₹966.80</span><b class="change down">▼ 0.33%</b></span>
+<span class="stock" data-symbol="BAJAJ-AUTO"><strong>BAJAJ-AUTO</strong><span class="price">₹10,830.00</span><b class="change up">▲ 2.46%</b></span>
+<span class="stock" data-symbol="KOTAKBANK"><strong>KOTAKBANK</strong><span class="price">₹496.90</span><b class="change up">▲ 0.41%</b></span>
+<span class="stock" data-symbol="HINDUNILVR"><strong>HINDUNILVR</strong><span class="price">₹2,045.00</span><b class="change up">▲ 2.61%</b></span>
+<span class="stock" data-symbol="BEL"><strong>BEL</strong><span class="price">₹400.90</span><b class="change up">▲ 1.29%</b></span>
+<span class="stock" data-symbol="INDIGO"><strong>INDIGO</strong><span class="price">₹5,550.00</span><b class="change up">▲ 0.92%</b></span>
+<span class="stock" data-symbol="SUNPHARMA"><strong>SUNPHARMA</strong><span class="price">₹1,897.30</span><b class="change up">▲ 1.38%</b></span>
+<span class="stock" data-symbol="HCLTECH"><strong>HCLTECH</strong><span class="price">₹1,326.20</span><b class="change down">▼ 1.38%</b></span>
+<span class="stock" data-symbol="APOLLOHOSP"><strong>APOLLOHOSP</strong><span class="price">₹8,707.50</span><b class="change down">▼ 1.29%</b></span>
+<span class="stock" data-symbol="TECHM"><strong>TECHM</strong><span class="price">₹1,722.30</span><b class="change down">▼ 1.58%</b></span>
+<span class="stock" data-symbol="TATASTEEL"><strong>TATASTEEL</strong><span class="price">₹181.07</span><b class="change up">▲ 1.16%</b></span>
+<span class="stock" data-symbol="ASIANPAINT"><strong>ASIANPAINT</strong><span class="price">₹2,600.20</span><b class="change up">▲ 0.77%</b></span>
+<span class="stock" data-symbol="HDFCLIFE"><strong>HDFCLIFE</strong><span class="price">₹579.60</span><b class="change up">▲ 0.71%</b></span>
+<span class="stock" data-symbol="COALINDIA"><strong>COALINDIA</strong><span class="price">₹389.05</span><b class="change up">▲ 0.27%</b></span>
+<span class="stock" data-symbol="CIPLA"><strong>CIPLA</strong><span class="price">₹1,413.20</span><b class="change down">▼ 0.27%</b></span>
+<span class="stock" data-symbol="TRENT"><strong>TRENT</strong><span class="price">₹3,202.00</span><b class="change up">▲ 0.38%</b></span>
+<span class="stock" data-symbol="GRASIM"><strong>GRASIM</strong><span class="price">₹3,112.60</span><b class="change up">▲ 1.65%</b></span>
+<span class="stock" data-symbol="NTPC"><strong>NTPC</strong><span class="price">₹322.10</span><b class="change up">▲ 0.53%</b></span>
+<span class="stock" data-symbol="ADANIENT"><strong>ADANIENT</strong><span class="price">₹2,702.30</span><b class="change up">▲ 0.67%</b></span>
+<span class="stock" data-symbol="ULTRACEMCO"><strong>ULTRACEMCO</strong><span class="price">₹12,524.00</span><b class="change up">▲ 0.77%</b></span>
+<span class="stock" data-symbol="ADANIPORTS"><strong>ADANIPORTS</strong><span class="price">₹1,902.00</span><b class="change down">▼ 0.03%</b></span>
+<span class="stock" data-symbol="JSWSTEEL"><strong>JSWSTEEL</strong><span class="price">₹1,322.40</span><b class="change up">▲ 0.49%</b></span>
+<span class="stock" data-symbol="NESTLEIND"><strong>NESTLEIND</strong><span class="price">₹1,300.00</span><b class="change up">▲ 1.44%</b></span>
+<span class="stock" data-symbol="JIOFIN"><strong>JIOFIN</strong><span class="price">₹225.43</span><b class="change up">▲ 0.41%</b></span>
+<span class="stock" data-symbol="POWERGRID"><strong>POWERGRID</strong><span class="price">₹261.30</span><b class="change up">▲ 0.85%</b></span>
+<span class="stock" data-symbol="MAXHEALTH"><strong>MAXHEALTH</strong><span class="price">₹1,022.85</span><b class="change flat">● 0.00%</b></span>
+<span class="stock" data-symbol="DRREDDY"><strong>DRREDDY</strong><span class="price">₹1,390.10</span><b class="change down">▼ 0.58%</b></span>
+<span class="stock" data-symbol="BAJAJFINSV"><strong>BAJAJFINSV</strong><span class="price">₹1,879.20</span><b class="change up">▲ 1.24%</b></span>
+<span class="stock" data-symbol="ONGC"><strong>ONGC</strong><span class="price">₹224.64</span><b class="change down">▼ 0.16%</b></span>
+<span class="stock" data-symbol="SBILIFE"><strong>SBILIFE</strong><span class="price">₹1,803.90</span><b class="change up">▲ 0.89%</b></span>
+<span class="stock" data-symbol="TATACONSUM"><strong>TATACONSUM</strong><span class="price">₹1,134.40</span><b class="change up">▲ 0.31%</b></span>
+</div><div aria-hidden="true" class="sequence">
+<span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><b class="change up">▲ 0.42%</b></span>
+<span class="stock" data-symbol="SBIN"><strong>SBIN</strong><span class="price">₹1,143.25</span><b class="change up">▲ 0.73%</b></span>
+<span class="stock" data-symbol="MARUTI"><strong>MARUTI</strong><span class="price">₹13,451.00</span><b class="change up">▲ 6.48%</b></span>
+<span class="stock" data-symbol="ICICIBANK"><strong>ICICIBANK</strong><span class="price">₹1,594.60</span><b class="change down">▼ 0.42%</b></span>
+<span class="stock" data-symbol="M&amp;M"><strong>M&amp;M</strong><span class="price">₹3,508.40</span><b class="change up">▲ 4.44%</b></span>
+<span class="stock" data-symbol="ETERNAL"><strong>ETERNAL</strong><span class="price">₹361.55</span><b class="change down">▼ 1.22%</b></span>
+<span class="stock" data-symbol="HDFCBANK"><strong>HDFCBANK</strong><span class="price">₹809.45</span><b class="change up">▲ 0.16%</b></span>
+<span class="stock" data-symbol="RELIANCE"><strong>RELIANCE</strong><span class="price">₹1,360.70</span><b class="change down">▼ 0.17%</b></span>
+<span class="stock" data-symbol="BHARTIARTL"><strong>BHARTIARTL</strong><span class="price">₹2,139.50</span><b class="change up">▲ 0.35%</b></span>
+<span class="stock" data-symbol="INFY"><strong>INFY</strong><span class="price">₹1,084.20</span><b class="change down">▼ 2.22%</b></span>
+<span class="stock" data-symbol="AXISBANK"><strong>AXISBANK</strong><span class="price">₹1,369.50</span><b class="change up">▲ 0.70%</b></span>
+<span class="stock" data-symbol="HINDALCO"><strong>HINDALCO</strong><span class="price">₹903.95</span><b class="change up">▲ 0.44%</b></span>
+<span class="stock" data-symbol="BSE"><strong>BSE</strong><span class="price">₹3,772.00</span><b class="change up">▲ 0.43%</b></span>
+<span class="stock" data-symbol="EICHERMOT"><strong>EICHERMOT</strong><span class="price">₹8,057.50</span><b class="change up">▲ 4.64%</b></span>
+<span class="stock" data-symbol="BAJFINANCE"><strong>BAJFINANCE</strong><span class="price">₹1,099.95</span><b class="change up">▲ 0.56%</b></span>
+<span class="stock" data-symbol="TMPV"><strong>TMPV</strong><span class="price">₹263.00</span><b class="change up">▲ 4.14%</b></span>
+<span class="stock" data-symbol="TITAN"><strong>TITAN</strong><span class="price">₹4,660.00</span><b class="change up">▲ 0.26%</b></span>
+<span class="stock" data-symbol="ITC"><strong>ITC</strong><span class="price">₹298.30</span><b class="change up">▲ 0.57%</b></span>
+<span class="stock" data-symbol="TCS"><strong>TCS</strong><span class="price">₹2,358.70</span><b class="change down">▼ 0.87%</b></span>
+<span class="stock" data-symbol="LT"><strong>LT</strong><span class="price">₹4,166.40</span><b class="change up">▲ 0.18%</b></span>
+<span class="stock" data-symbol="SHRIRAMFIN"><strong>SHRIRAMFIN</strong><span class="price">₹966.80</span><b class="change down">▼ 0.33%</b></span>
+<span class="stock" data-symbol="BAJAJ-AUTO"><strong>BAJAJ-AUTO</strong><span class="price">₹10,830.00</span><b class="change up">▲ 2.46%</b></span>
+<span class="stock" data-symbol="KOTAKBANK"><strong>KOTAKBANK</strong><span class="price">₹496.90</span><b class="change up">▲ 0.41%</b></span>
+<span class="stock" data-symbol="HINDUNILVR"><strong>HINDUNILVR</strong><span class="price">₹2,045.00</span><b class="change up">▲ 2.61%</b></span>
+<span class="stock" data-symbol="BEL"><strong>BEL</strong><span class="price">₹400.90</span><b class="change up">▲ 1.29%</b></span>
+<span class="stock" data-symbol="INDIGO"><strong>INDIGO</strong><span class="price">₹5,550.00</span><b class="change up">▲ 0.92%</b></span>
+<span class="stock" data-symbol="SUNPHARMA"><strong>SUNPHARMA</strong><span class="price">₹1,897.30</span><b class="change up">▲ 1.38%</b></span>
+<span class="stock" data-symbol="HCLTECH"><strong>HCLTECH</strong><span class="price">₹1,326.20</span><b class="change down">▼ 1.38%</b></span>
+<span class="stock" data-symbol="APOLLOHOSP"><strong>APOLLOHOSP</strong><span class="price">₹8,707.50</span><b class="change down">▼ 1.29%</b></span>
+<span class="stock" data-symbol="TECHM"><strong>TECHM</strong><span class="price">₹1,722.30</span><b class="change down">▼ 1.58%</b></span>
+<span class="stock" data-symbol="TATASTEEL"><strong>TATASTEEL</strong><span class="price">₹181.07</span><b class="change up">▲ 1.16%</b></span>
+<span class="stock" data-symbol="ASIANPAINT"><strong>ASIANPAINT</strong><span class="price">₹2,600.20</span><b class="change up">▲ 0.77%</b></span>
+<span class="stock" data-symbol="HDFCLIFE"><strong>HDFCLIFE</strong><span class="price">₹579.60</span><b class="change up">▲ 0.71%</b></span>
+<span class="stock" data-symbol="COALINDIA"><strong>COALINDIA</strong><span class="price">₹389.05</span><b class="change up">▲ 0.27%</b></span>
+<span class="stock" data-symbol="CIPLA"><strong>CIPLA</strong><span class="price">₹1,413.20</span><b class="change down">▼ 0.27%</b></span>
+<span class="stock" data-symbol="TRENT"><strong>TRENT</strong><span class="price">₹3,202.00</span><b class="change up">▲ 0.38%</b></span>
+<span class="stock" data-symbol="GRASIM"><strong>GRASIM</strong><span class="price">₹3,112.60</span><b class="change up">▲ 1.65%</b></span>
+<span class="stock" data-symbol="NTPC"><strong>NTPC</strong><span class="price">₹322.10</span><b class="change up">▲ 0.53%</b></span>
+<span class="stock" data-symbol="ADANIENT"><strong>ADANIENT</strong><span class="price">₹2,702.30</span><b class="change up">▲ 0.67%</b></span>
+<span class="stock" data-symbol="ULTRACEMCO"><strong>ULTRACEMCO</strong><span class="price">₹12,524.00</span><b class="change up">▲ 0.77%</b></span>
+<span class="stock" data-symbol="ADANIPORTS"><strong>ADANIPORTS</strong><span class="price">₹1,902.00</span><b class="change down">▼ 0.03%</b></span>
+<span class="stock" data-symbol="JSWSTEEL"><strong>JSWSTEEL</strong><span class="price">₹1,322.40</span><b class="change up">▲ 0.49%</b></span>
+<span class="stock" data-symbol="NESTLEIND"><strong>NESTLEIND</strong><span class="price">₹1,300.00</span><b class="change up">▲ 1.44%</b></span>
+<span class="stock" data-symbol="JIOFIN"><strong>JIOFIN</strong><span class="price">₹225.43</span><b class="change up">▲ 0.41%</b></span>
+<span class="stock" data-symbol="POWERGRID"><strong>POWERGRID</strong><span class="price">₹261.30</span><b class="change up">▲ 0.85%</b></span>
+<span class="stock" data-symbol="MAXHEALTH"><strong>MAXHEALTH</strong><span class="price">₹1,022.85</span><b class="change flat">● 0.00%</b></span>
+<span class="stock" data-symbol="DRREDDY"><strong>DRREDDY</strong><span class="price">₹1,390.10</span><b class="change down">▼ 0.58%</b></span>
+<span class="stock" data-symbol="BAJAJFINSV"><strong>BAJAJFINSV</strong><span class="price">₹1,879.20</span><b class="change up">▲ 1.24%</b></span>
+<span class="stock" data-symbol="ONGC"><strong>ONGC</strong><span class="price">₹224.64</span><b class="change down">▼ 0.16%</b></span>
+<span class="stock" data-symbol="SBILIFE"><strong>SBILIFE</strong><span class="price">₹1,803.90</span><b class="change up">▲ 0.89%</b></span>
+<span class="stock" data-symbol="TATACONSUM"><strong>TATACONSUM</strong><span class="price">₹1,134.40</span><b class="change up">▲ 0.31%</b></span>
+</div></div></div>
+<script>
+(function(){
+  // Marquee speed calculation: 105 pixels/second seamless loop
+  const track = document.getElementById('track');
+  function setSpeed(){
+    if(!track || !track.children[0]) return;
+    const oneSequence = track.children[0].getBoundingClientRect().width;
+    track.style.setProperty('--duration', Math.max(20, oneSequence / 105) + 's');
+  }
+  setSpeed();
+  window.addEventListener('resize', setSpeed);
+
+  // =========================================================================
+  // GOOGLE SHEETS LIVE PRICE INTEGRATION
+  // =========================================================================
+  // Default published Google Sheet CSV link
+  const DEFAULT_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT10bV3xhJBJMqEUKmMtFAwnFF2CSC9ajdhWqFBGf2g2q9k0qPqhLdFIpmIFslfGl-ZnezeTXlW519i/pub?output=csv"; 
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const rawUrl = (urlParams.get('sheet') || DEFAULT_SHEET_CSV_URL).trim();
+
+  // Auto-normalize any Google Sheets link to CSV output
+  function normalizeGoogleSheetUrl(url) {
+    if (!url) return "";
+    if (url.includes('/pubhtml')) {
+      return url.replace('/pubhtml', '/pub?output=csv');
+    }
+    if (url.includes('/pub') && !url.includes('output=csv')) {
+      return url + (url.includes('?') ? '&' : '?') + 'output=csv';
+    }
+    if (url.includes('/edit')) {
+      return url.replace(/\/edit.*$/, '/gviz/tq?tqx=out:csv');
+    }
+    return url;
+  }
+
+  const CSV_URL = normalizeGoogleSheetUrl(rawUrl);
+  const POLL_INTERVAL_MS = 30000; // Poll every 30 seconds
+
+  function parseCSV(text) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+
+    const headers = parseCSVLine(lines[0]).map(h => h.trim().toLowerCase());
+    const symIdx = headers.findIndex(h => h.includes('symbol') || h.includes('ticker') || h.includes('name'));
+    const priceIdx = headers.findIndex(h => h.includes('price') || h.includes('ltp') || h.includes('rate') || h.includes('val'));
+    const chgIdx = headers.findIndex(h => h.includes('change') || h.includes('chg') || h.includes('pct') || h.includes('%'));
+
+    const sCol = symIdx >= 0 ? symIdx : 0;
+    const pCol = priceIdx >= 0 ? priceIdx : 2;
+    const cCol = chgIdx >= 0 ? chgIdx : 3;
+
+    const data = [];
+    for (let i = 1; i < lines.length; i++) {
+      const row = parseCSVLine(lines[i]);
+      if (row.length > sCol && row[sCol]) {
+        data.push({
+          symbol: row[sCol].trim(),
+          price: row[pCol] ? row[pCol].trim() : '',
+          change: row[cCol] ? row[cCol].trim() : ''
+        });
+      }
+    }
+    return data;
+  }
+
+  function parseCSVLine(line) {
+    const result = [];
+    let insideQuotes = false;
+    let entry = '';
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') {
+        if (insideQuotes && line[i+1] === '"') {
+          entry += '"';
+          i++;
+        } else {
+          insideQuotes = !insideQuotes;
+        }
+      } else if (c === ',' && !insideQuotes) {
+        result.push(entry.trim());
+        entry = '';
+      } else {
+        entry += c;
+      }
+    }
+    result.push(entry.trim());
+    return result;
+  }
+
+  function formatINR(val) {
+    const num = parseFloat(String(val).replace(/[^0-9.-]+/g, ''));
+    if (isNaN(num)) return null;
+    return '₹' + num.toLocaleString('en-IN', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
+  function formatChange(val) {
+    const num = parseFloat(String(val).replace(/[^0-9.-]+/g, ''));
+    if (isNaN(num)) return null;
+    const isUp = num > 0.0001;
+    const isDown = num < -0.0001;
+    return {
+      cls: isUp ? 'up' : (isDown ? 'down' : 'flat'),
+      text: (isUp ? '▲ ' : (isDown ? '▼ ' : '● ')) + Math.abs(num).toFixed(2) + '%'
+    };
+  }
+
+  async function updatePrices() {
+    if (!CSV_URL) {
+      console.info('Tip: Configure DEFAULT_SHEET_CSV_URL or open with ?sheet=<CSV_URL>');
+      return;
+    }
+    try {
+      const separator = CSV_URL.indexOf('?') >= 0 ? '&' : '?';
+      const fetchUrl = CSV_URL + separator + '_t=' + Date.now();
+      const res = await fetch(fetchUrl);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const csvText = await res.text();
+      const rows = parseCSV(csvText);
+
+      let anyUpdated = false;
+      rows.forEach(item => {
+        if (!item.symbol) return;
+        const symClean = item.symbol.toUpperCase();
+        const elements = document.querySelectorAll(`[data-symbol="${symClean}"]`);
+        if (elements.length === 0) return;
+
+        const formattedPrice = formatINR(item.price);
+        const changeInfo = formatChange(item.change);
+
+        elements.forEach(el => {
+          if (formattedPrice) {
+            const pEl = el.querySelector('.price');
+            if (pEl && pEl.textContent !== formattedPrice) {
+              pEl.textContent = formattedPrice;
+              anyUpdated = true;
+            }
+          }
+          if (changeInfo) {
+            const cEl = el.querySelector('.change');
+            if (cEl) {
+              cEl.className = 'change ' + changeInfo.cls;
+              cEl.textContent = changeInfo.text;
+            }
+          }
+        });
+      });
+
+      if (anyUpdated) {
+        setSpeed();
+      }
+    } catch (err) {
+      console.error('Failed to update live stock prices from Google Sheets:', err);
+    }
+  }
+
+  updatePrices();
+  setInterval(updatePrices, POLL_INTERVAL_MS);
+})();
+</script></body></html>
