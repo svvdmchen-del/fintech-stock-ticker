@@ -1,6 +1,6 @@
 # Panimalar MBA FinTech Lab — Live Stock Ticker
 
-A lightweight, continuous scrolling stock ticker (1120x40px) displaying the **NIFTY 50** index and its constituent stocks with **live prices via Google Finance**.
+A lightweight, continuous scrolling stock ticker (1120x40px) displaying **Crude Oil (WTI NYMEX)**, **Gold (COMEX)**, **USD / INR**, major indices (**NIFTY 50**, **SENSEX**, etc.), and constituent stocks with **live prices via Google Finance & Google Sheets**.
 
 Designed for display on laboratory LED ticker panels, TV screens, and website embedding.
 
@@ -55,13 +55,26 @@ git push -u origin main
 ## 📊 Live Google Sheets Data Source Setup
 
 1. Open [Google Sheets](https://sheets.new) and import `google_sheets_nifty50_template.csv`.
-2. Set recalculation to 1 minute:
+2. Configure price formulas:
+   * **USD / INR**:
+     * Price: `=GOOGLEFINANCE("CURRENCY:USDINR")`
+     * Change %: `=GOOGLEFINANCE("CURRENCY:USDINR", "changepct")`
+   * **Crude Oil (NYMEX: CLW00)**:
+     * Live Quote: `=IMPORTXML("https://www.google.com/finance/quote/CLW00:NYMEX", "//*[@class='YMlKec fxKbKc']")`
+     * Change %: `=IMPORTXML("https://www.google.com/finance/quote/CLW00:NYMEX", "//*[@class='JwB6zf']")`
+   * **Gold (COMEX: GCW00)**:
+     * Live Quote: `=IMPORTXML("https://www.google.com/finance/quote/GCW00:COMEX", "//*[@class='YMlKec fxKbKc']")`
+     * Change %: `=IMPORTXML("https://www.google.com/finance/quote/GCW00:COMEX", "//*[@class='JwB6zf']")`
+   * **Stocks & Indices**:
+     * Price: `=GOOGLEFINANCE(B5, "price")`
+     * Change %: `=GOOGLEFINANCE(B5, "changepct")`
+3. Set recalculation to 1 minute:
    * **File** > **Settings** > **Calculation** > Set *Recalculation* to **"On change and every minute"**.
-3. Publish as CSV:
+4. Publish as CSV:
    * **File** > **Share** > **Publish to web**.
    * Change "Web page" to **Comma-separated values (.csv)**.
    * Click **Publish** and copy the link.
-4. Replace the default URL in `index.html` (`DEFAULT_SHEET_CSV_URL`) or pass it via `?sheet=...`.
+5. Replace the default URL in `index.html` (`DEFAULT_SHEET_CSV_URL`) or pass it via `?sheet=...`.
 
 ---
 

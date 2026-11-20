@@ -26,6 +26,9 @@ body{display:block}
 <div aria-label="Scrolling stock prices ticker" class="ticker">
 <div class="track" id="track">
 <div class="sequence">
+<span class="stock" data-symbol="CRUDE OIL"><strong>CRUDE OIL</strong><span class="price">$71.24</span><b class="change up">▲ 0.45%</b></span>
+<span class="stock" data-symbol="GOLD COMEX"><strong>GOLD COMEX</strong><span class="price">$2,652.50</span><b class="change up">▲ 0.32%</b></span>
+<span class="stock" data-symbol="USD/INR"><strong>USD/INR</strong><span class="price">₹84.45</span><b class="change flat">● 0.00%</b></span>
 <span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><b class="change up">▲ 0.42%</b></span>
 <span class="stock" data-symbol="SENSEX"><strong>SENSEX</strong><span class="price">₹82,890.94</span><b class="change up">▲ 0.35%</b></span>
 <span class="stock" data-symbol="NIFTY 500"><strong>NIFTY 500</strong><span class="price">₹23,845.60</span><b class="change up">▲ 0.40%</b></span>
@@ -91,6 +94,9 @@ body{display:block}
 <span class="stock" data-symbol="ULTRACEMCO"><strong>ULTRACEMCO</strong><span class="price">₹12,524.00</span><b class="change up">▲ 0.77%</b></span>
 </div>
 <div aria-hidden="true" class="sequence">
+<span class="stock" data-symbol="CRUDE OIL"><strong>CRUDE OIL</strong><span class="price">$71.24</span><b class="change up">▲ 0.45%</b></span>
+<span class="stock" data-symbol="GOLD COMEX"><strong>GOLD COMEX</strong><span class="price">$2,652.50</span><b class="change up">▲ 0.32%</b></span>
+<span class="stock" data-symbol="USD/INR"><strong>USD/INR</strong><span class="price">₹84.45</span><b class="change flat">● 0.00%</b></span>
 <span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><b class="change up">▲ 0.42%</b></span>
 <span class="stock" data-symbol="SENSEX"><strong>SENSEX</strong><span class="price">₹82,890.94</span><b class="change up">▲ 0.35%</b></span>
 <span class="stock" data-symbol="NIFTY 500"><strong>NIFTY 500</strong><span class="price">₹23,845.60</span><b class="change up">▲ 0.40%</b></span>
@@ -247,9 +253,27 @@ body{display:block}
     return result;
   }
 
-  function formatINR(val) {
-    const num = parseFloat(String(val).replace(/[^0-9.-]+/g, ''));
+  function formatPrice(val, symbol) {
+    const rawStr = String(val).trim();
+    const num = parseFloat(rawStr.replace(/[^0-9.-]+/g, ''));
     if (isNaN(num)) return null;
+
+    const s = (symbol || '').toUpperCase();
+    const isUSD = rawStr.includes('$') || 
+                  s.includes('CLW00') || 
+                  s.includes('CRUDE') || 
+                  s.includes('GCW00') || 
+                  s.includes('GOLD') || 
+                  s.includes('COMEX') || 
+                  s.includes('NYMEX');
+    
+    if (isUSD) {
+      return '$' + num.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
     return '₹' + num.toLocaleString('en-IN', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
@@ -279,7 +303,28 @@ body{display:block}
     'TATAMOTORS': 'TMPV',
     'TMPV': 'TMPV',
     'ZOMATO': 'ETERNAL',
-    'ETERNAL': 'ETERNAL'
+    'ETERNAL': 'ETERNAL',
+
+    // Commodities & Currencies
+    'CLW00': 'CRUDEOIL',
+    'CLW00NYMEX': 'CRUDEOIL',
+    'NYMEXCLW00': 'CRUDEOIL',
+    'CRUDEOIL': 'CRUDEOIL',
+    'CRUDE': 'CRUDEOIL',
+    'WTI': 'CRUDEOIL',
+    'WTICRUDE': 'CRUDEOIL',
+
+    'GCW00': 'GOLDCOMEX',
+    'GCW00COMEX': 'GOLDCOMEX',
+    'COMEXGCW00': 'GOLDCOMEX',
+    'GOLD': 'GOLDCOMEX',
+    'GOLDCOMEX': 'GOLDCOMEX',
+    'COMEXGOLD': 'GOLDCOMEX',
+
+    'USDINR': 'USDINR',
+    'CURRENCYUSDINR': 'USDINR',
+    'USDTOINR': 'USDINR',
+    'USD': 'USDINR'
   };
 
   function findElementsForSymbol(sym) {
@@ -288,13 +333,13 @@ body{display:block}
     const direct = Array.from(document.querySelectorAll(`[data-symbol="${raw}"]`));
     if (direct.length > 0) return direct;
 
-    const normRaw = raw.replace(/[\s_-]+/g, '');
+    const normRaw = raw.replace(/[\s_\-\/:]+/g, '');
     const targetKey = aliasMap[normRaw] || normRaw;
 
     const matched = [];
     document.querySelectorAll('.stock').forEach(el => {
       const s = (el.getAttribute('data-symbol') || '').toUpperCase();
-      const normS = s.replace(/[\s_-]+/g, '');
+      const normS = s.replace(/[\s_\-\/:]+/g, '');
       const mappedS = aliasMap[normS] || normS;
       if (mappedS === targetKey || normS === normRaw) {
         matched.push(el);
@@ -322,10 +367,12 @@ body{display:block}
         const elements = findElementsForSymbol(item.symbol);
         if (elements.length === 0) return;
 
-        const formattedPrice = formatINR(item.price);
         const changeInfo = formatChange(item.change);
 
         elements.forEach(el => {
+          const elSym = el.getAttribute('data-symbol') || item.symbol;
+          const formattedPrice = formatPrice(item.price, elSym);
+
           if (formattedPrice) {
             const pEl = el.querySelector('.price');
             if (pEl && pEl.textContent !== formattedPrice) {
