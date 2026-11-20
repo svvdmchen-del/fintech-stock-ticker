@@ -19,6 +19,12 @@ body{display:block}
 .up{color:var(--green)}
 .down{color:var(--red)}
 .flat{color:#a9b8cf}
+.spark{flex:none;display:inline-block;vertical-align:middle;margin:0 2px}
+.spark polyline{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.spark.up polyline{stroke:var(--green)}
+.spark.down polyline{stroke:var(--red)}
+.spark.flat polyline{stroke:#a9b8cf}
+.spark circle{fill:#ffffff}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 </style>
 </head>
@@ -30,8 +36,8 @@ body{display:block}
 <span class="stock" data-symbol="GOLD COMEX"><strong>GOLD COMEX</strong><span class="price">$3,554.50</span><b class="change down">▼ 3.55%</b></span>
 <span class="stock" data-symbol="GOLD (IND 22K)"><strong>GOLD (IND 22K 1g)</strong><span class="price">₹11,320.00</span><b class="change down">▼ 3.55%</b></span>
 <span class="stock" data-symbol="USD/INR"><strong>USD/INR</strong><span class="price">₹92.84</span><b class="change down">▼ 0.48%</b></span>
-<span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><b class="change up">▲ 0.42%</b></span>
-<span class="stock" data-symbol="SENSEX"><strong>SENSEX</strong><span class="price">₹82,890.94</span><b class="change up">▲ 0.35%</b></span>
+<span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><svg class="spark up" width="38" height="18" viewBox="0 0 38 18"><polyline points="1,14 7,16 15,9 22,11 30,5 36,3"/><circle cx="36" cy="3" r="2"/></svg><b class="change up">▲ 0.42%</b></span>
+<span class="stock" data-symbol="SENSEX"><strong>SENSEX</strong><span class="price">₹82,890.94</span><svg class="spark up" width="38" height="18" viewBox="0 0 38 18"><polyline points="1,12 8,8 15,12 22,9 29,6 36,3"/><circle cx="36" cy="3" r="2"/></svg><b class="change up">▲ 0.35%</b></span>
 <span class="stock" data-symbol="NIFTY 500"><strong>NIFTY 500</strong><span class="price">₹23,845.60</span><b class="change up">▲ 0.40%</b></span>
 <span class="stock" data-symbol="NIFTY_AUTO"><strong>NIFTY_AUTO</strong><span class="price">₹28,609.25</span><b class="change up">▲ 0.03%</b></span>
 <span class="stock" data-symbol="NIFTY_ENERGY"><strong>NIFTY_ENERGY</strong><span class="price">₹37,018.45</span><b class="change down">▼ 1.03%</b></span>
@@ -99,8 +105,8 @@ body{display:block}
 <span class="stock" data-symbol="GOLD COMEX"><strong>GOLD COMEX</strong><span class="price">$3,554.50</span><b class="change down">▼ 3.55%</b></span>
 <span class="stock" data-symbol="GOLD (IND 22K)"><strong>GOLD (IND 22K 1g)</strong><span class="price">₹11,320.00</span><b class="change down">▼ 3.55%</b></span>
 <span class="stock" data-symbol="USD/INR"><strong>USD/INR</strong><span class="price">₹92.84</span><b class="change down">▼ 0.48%</b></span>
-<span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><b class="change up">▲ 0.42%</b></span>
-<span class="stock" data-symbol="SENSEX"><strong>SENSEX</strong><span class="price">₹82,890.94</span><b class="change up">▲ 0.35%</b></span>
+<span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><svg class="spark up" width="38" height="18" viewBox="0 0 38 18"><polyline points="1,14 7,16 15,9 22,11 30,5 36,3"/><circle cx="36" cy="3" r="2"/></svg><b class="change up">▲ 0.42%</b></span>
+<span class="stock" data-symbol="SENSEX"><strong>SENSEX</strong><span class="price">₹82,890.94</span><svg class="spark up" width="38" height="18" viewBox="0 0 38 18"><polyline points="1,12 8,8 15,12 22,9 29,6 36,3"/><circle cx="36" cy="3" r="2"/></svg><b class="change up">▲ 0.35%</b></span>
 <span class="stock" data-symbol="NIFTY 500"><strong>NIFTY 500</strong><span class="price">₹23,845.60</span><b class="change up">▲ 0.40%</b></span>
 <span class="stock" data-symbol="NIFTY_AUTO"><strong>NIFTY_AUTO</strong><span class="price">₹28,609.25</span><b class="change up">▲ 0.03%</b></span>
 <span class="stock" data-symbol="NIFTY_ENERGY"><strong>NIFTY_ENERGY</strong><span class="price">₹37,018.45</span><b class="change down">▼ 1.03%</b></span>
@@ -425,6 +431,10 @@ body{display:block}
             if (cEl) {
               cEl.className = 'change ' + changeInfo.cls;
               cEl.textContent = changeInfo.text;
+            }
+            const sEl = el.querySelector('.spark');
+            if (sEl) {
+              sEl.className = 'spark ' + changeInfo.cls;
             }
           }
         });
