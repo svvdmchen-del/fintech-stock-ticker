@@ -394,10 +394,18 @@ body{display:block}
         setSpeed();
       }
 
+      // Check if USD/INR was updated by Google Sheet
+      let usdUpdatedBySheet = false;
+      rows.forEach(item => {
+        if (!item.symbol) return;
+        const norm = item.symbol.toUpperCase().replace(/[\s_\-\/:]+/g, '');
+        if ((norm === 'USDINR' || norm === 'CURRENCYUSDINR') && item.price) {
+          usdUpdatedBySheet = true;
+        }
+      });
+
       // Live forex fallback if not populated in Google Sheet
-      const usdEls = findElementsForSymbol('USD/INR');
-      const firstPrice = usdEls[0] ? (usdEls[0].querySelector('.price') || {}).textContent : '';
-      if (!firstPrice || firstPrice === '₹93.43' || firstPrice === '₹84.45') {
+      if (!usdUpdatedBySheet) {
         try {
           const fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
           if (fxRes.ok) {
@@ -407,6 +415,7 @@ body{display:block}
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
               });
+              const usdEls = findElementsForSymbol('USD/INR');
               usdEls.forEach(el => {
                 const p = el.querySelector('.price');
                 if (p && p.textContent !== formattedFx) {
