@@ -31,6 +31,37 @@ function fetchYahoo(ticker) {
   });
 }
 
+function fetchIBJA() {
+  return new Promise((resolve) => {
+    https.get('https://ibjarates.com/', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+      }
+    }, res => {
+      let d = '';
+      res.on('data', chunk => d += chunk);
+      res.on('end', () => {
+        try {
+          // Look for 916 purity (22 Karat) 1 gram live rate
+          const match916 = d.match(/id="GoldRatesCompare916">([0-9,]+)<\/span>/);
+          if (match916 && match916[1]) {
+            const price = parseFloat(match916[1].replace(/,/g, ''));
+            const isRed = d.includes('id="GoldRatesCompare916Red"');
+            resolve({
+              price,
+              cls: isRed ? 'down' : 'up',
+              change_text: isRed ? '▼' : '▲'
+            });
+            return;
+          }
+        } catch (_) {}
+        resolve(null);
+      });
+    }).on('error', () => resolve(null));
+  });
+}
+
 function formatUSD(num) {
   return '$' + num.toLocaleString('en-US', {
     minimumFractionDigits: 2,
@@ -55,26 +86,37 @@ function formatChange(chg) {
 }
 
 async function main() {
-  console.log('Fetching live market quotes from Yahoo Finance / Global Feeds...');
+  console.log('Fetching live market quotes from Yahoo Finance & IBJA Live...');
 
   try {
-    const [cl, gc, inr] = await Promise.all([
+    const [cl, gc, inr, ibja] = await Promise.all([
       fetchYahoo('CL=F'),
       fetchYahoo('GC=F'),
-      fetchYahoo('INR=X')
+      fetchYahoo('INR=X'),
+      fetchIBJA()
     ]);
-
-    // IBJA 1g 22K Gold Rate calculation:
-    // 1 troy ounce = 31.1034768 grams pure gold (24K)
-    // 24K INR per gram = (Gold COMEX USD / 31.1034768) * USDINR * 1.06 (customs duty/cess parity)
-    // 22K INR per gram = 24K * (22 / 24)
-    const pure24k_inr_g = (gc.price / 31.1034768) * inr.price * 1.06;
-    const ibja22k_inr_g = pure24k_inr_g * (22 / 24);
 
     const clChg = formatChange(cl.chgPct);
     const gcChg = formatChange(gc.chgPct);
     const inrChg = formatChange(inr.chgPct);
-    const goldIndChg = formatChange(gc.chgPct);
+
+    // IBJA 1g 22K (916 Purity):
+    // Use direct official ibjarates.com live rate if available
+    let goldIndPrice = 11320;
+    let goldIndCls = 'down';
+    let goldIndText = '▼ ' + Math.abs(gc.chgPct).toFixed(2) + '%';
+
+    if (ibja && ibja.price) {
+      goldIndPrice = ibja.price;
+      goldIndCls = ibja.cls;
+      goldIndText = (ibja.cls === 'down' ? '▼ ' : '▲ ') + Math.abs(gc.chgPct).toFixed(2) + '%';
+    } else {
+      // Fallback calculation:
+      const pure24k_inr_g = (gc.price / 31.1034768) * inr.price * 1.15;
+      goldIndPrice = parseFloat((pure24k_inr_g * (22 / 24)).toFixed(2));
+      goldIndCls = gcChg.cls;
+      goldIndText = gcChg.text;
+    }
 
     const data = {
       updated_at: new Date().toISOString(),
@@ -106,14 +148,14 @@ async function main() {
         {
           symbol: 'GOLD SPOT (IND 1g 22K)',
           display_name: 'GOLD (IND 22K)',
-          ticker: 'IBJA:22K_1G',
-          source: 'IBJA 22K 1g Spot',
-          price: parseFloat(ibja22k_inr_g.toFixed(2)),
+          ticker: 'IBJA:916_1G',
+          source: 'ibjarates.com (916 Purity)',
+          price: goldIndPrice,
           currency: 'INR',
-          formatted_price: formatINR(ibja22k_inr_g),
+          formatted_price: formatINR(goldIndPrice),
           change_pct: parseFloat(gc.chgPct.toFixed(2)),
-          change_cls: goldIndChg.cls,
-          change_text: goldIndChg.text
+          change_cls: goldIndCls,
+          change_text: goldIndText
         },
         {
           symbol: 'USD/INR',
