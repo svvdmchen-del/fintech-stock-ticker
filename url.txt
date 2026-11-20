@@ -4,5 +4,13 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vT10bV3xhJBJMqEUKmMtFAwnFF2CSC9a
 https://docs.google.com/spreadsheets/d/e/2PACX-1vT10bV3xhJBJMqEUKmMtFAwnFF2CSC9ajdhWqFBGf2g2q9k0qPqhLdFIpmIFslfGl-ZnezeTXlW519i/pubhtml
 
 
-CLW00:NYMEX
-GCW00:COMEX
+ Asset           │ Official Source & Exchange            │ Ticker / Identifier                   │ Direct Endpoint / Feed                │ Quoted In
+  ─────────────────┼───────────────────────────────────────┼───────────────────────────────────────┼───────────────────────────────────────┼────────────────────────
+   Crude Oil       │ NYMEX (New York Mercantile Exchange)  │ CL=F (matches Google Finance          │ https://query1.finance.yahoo.com/v8/f │ USD ($) per barrel
+                   │ via Yahoo Finance                     │ CLW00:NYMEX)                          │ inance/chart/CL=F                     │
+   Gold COMEX      │ COMEX (CME Group, New York) via Yahoo │ GC=F (matches Google Finance          │ https://query1.finance.yahoo.com/v8/f │ USD ($) per troy ounce
+                   │ Finance                               │ GCW00:COMEX)                          │ inance/chart/GC=F                     │
+   USD / INR       │ Interbank Forex Market via Yahoo      │ INR=X (matches Google Finance USD-    │ https://query1.finance.yahoo.com/v8/f │ INR (₹) per 1 USD
+                   │ Finance                               │ INR)                                  │ inance/chart/INR=X                    │
+   Gold Spot India │ IBJA (India Bullion and Jewellers     │ 916 Purity (22K 1g)                   │ https://ibjarates.com/                │ INR (₹) per 1 gram
+                   │ Association)                          │                                       │                                       │
