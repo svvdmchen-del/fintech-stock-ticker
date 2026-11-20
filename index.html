@@ -26,9 +26,10 @@ body{display:block}
 <div aria-label="Scrolling stock prices ticker" class="ticker">
 <div class="track" id="track">
 <div class="sequence">
-<span class="stock" data-symbol="CRUDE OIL"><strong>CRUDE OIL</strong><span class="price">$82.60</span><b class="change up">▲ 0.19%</b></span>
-<span class="stock" data-symbol="GOLD COMEX"><strong>GOLD COMEX</strong><span class="price">$3,553.60</span><b class="change down">▼ 3.58%</b></span>
-<span class="stock" data-symbol="USD/INR"><strong>USD/INR</strong><span class="price">₹93.43</span><b class="change down">▼ 0.28%</b></span>
+<span class="stock" data-symbol="CRUDE OIL"><strong>CRUDE OIL</strong><span class="price">$83.07</span><b class="change up">▲ 0.76%</b></span>
+<span class="stock" data-symbol="GOLD COMEX"><strong>GOLD COMEX</strong><span class="price">$3,550.30</span><b class="change down">▼ 3.67%</b></span>
+<span class="stock" data-symbol="GOLD (IND 22K)"><strong>GOLD (IND 22K 1g)</strong><span class="price">₹10,306.10</span><b class="change down">▼ 3.67%</b></span>
+<span class="stock" data-symbol="USD/INR"><strong>USD/INR</strong><span class="price">₹92.92</span><b class="change down">▼ 0.38%</b></span>
 <span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><b class="change up">▲ 0.42%</b></span>
 <span class="stock" data-symbol="SENSEX"><strong>SENSEX</strong><span class="price">₹82,890.94</span><b class="change up">▲ 0.35%</b></span>
 <span class="stock" data-symbol="NIFTY 500"><strong>NIFTY 500</strong><span class="price">₹23,845.60</span><b class="change up">▲ 0.40%</b></span>
@@ -94,9 +95,10 @@ body{display:block}
 <span class="stock" data-symbol="ULTRACEMCO"><strong>ULTRACEMCO</strong><span class="price">₹12,524.00</span><b class="change up">▲ 0.77%</b></span>
 </div>
 <div aria-hidden="true" class="sequence">
-<span class="stock" data-symbol="CRUDE OIL"><strong>CRUDE OIL</strong><span class="price">$82.60</span><b class="change up">▲ 0.19%</b></span>
-<span class="stock" data-symbol="GOLD COMEX"><strong>GOLD COMEX</strong><span class="price">$3,553.60</span><b class="change down">▼ 3.58%</b></span>
-<span class="stock" data-symbol="USD/INR"><strong>USD/INR</strong><span class="price">₹93.43</span><b class="change down">▼ 0.28%</b></span>
+<span class="stock" data-symbol="CRUDE OIL"><strong>CRUDE OIL</strong><span class="price">$83.07</span><b class="change up">▲ 0.76%</b></span>
+<span class="stock" data-symbol="GOLD COMEX"><strong>GOLD COMEX</strong><span class="price">$3,550.30</span><b class="change down">▼ 3.67%</b></span>
+<span class="stock" data-symbol="GOLD (IND 22K)"><strong>GOLD (IND 22K 1g)</strong><span class="price">₹10,306.10</span><b class="change down">▼ 3.67%</b></span>
+<span class="stock" data-symbol="USD/INR"><strong>USD/INR</strong><span class="price">₹92.92</span><b class="change down">▼ 0.38%</b></span>
 <span class="stock" data-symbol="NIFTY 50"><strong>NIFTY 50</strong><span class="price">₹25,334.50</span><b class="change up">▲ 0.42%</b></span>
 <span class="stock" data-symbol="SENSEX"><strong>SENSEX</strong><span class="price">₹82,890.94</span><b class="change up">▲ 0.35%</b></span>
 <span class="stock" data-symbol="NIFTY 500"><strong>NIFTY 500</strong><span class="price">₹23,845.60</span><b class="change up">▲ 0.40%</b></span>
@@ -324,7 +326,19 @@ body{display:block}
     'USDINR': 'USDINR',
     'CURRENCYUSDINR': 'USDINR',
     'USDTOINR': 'USDINR',
-    'USD': 'USDINR'
+    'USD': 'USDINR',
+
+    // Gold India Spot (IBJA 22K 1g)
+    'GOLDIND22K': 'GOLDIND22K',
+    'GOLDIND22K1G': 'GOLDIND22K',
+    'GOLDSPOTIND1G22K': 'GOLDIND22K',
+    'GOLDINDIA': 'GOLDIND22K',
+    'GOLDINDIAN': 'GOLDIND22K',
+    'IBJA22K': 'GOLDIND22K',
+    'IBJA22K1G': 'GOLDIND22K',
+    'IBJAGOLD': 'GOLDIND22K',
+    'GOLDBEES': 'GOLDIND22K',
+    'GOLD22K': 'GOLDIND22K'
   };
 
   function findElementsForSymbol(sym) {
@@ -349,6 +363,32 @@ body{display:block}
   }
 
   async function updatePrices() {
+    // 1. Fetch automated GitHub Actions market prices (Crude, Gold Comex, Gold India, USD/INR)
+    try {
+      const mRes = await fetch('./market_prices.json?_t=' + Date.now());
+      if (mRes.ok) {
+        const mData = await mRes.json();
+        if (mData && Array.isArray(mData.assets)) {
+          mData.assets.forEach(asset => {
+            const els = findElementsForSymbol(asset.symbol);
+            els.forEach(el => {
+              const p = el.querySelector('.price');
+              if (p && asset.formatted_price && p.textContent !== asset.formatted_price) {
+                p.textContent = asset.formatted_price;
+              }
+              const c = el.querySelector('.change');
+              if (c && asset.change_text) {
+                c.className = 'change ' + (asset.change_cls || 'flat');
+                c.textContent = asset.change_text;
+              }
+            });
+          });
+        }
+      }
+    } catch (e) {
+      console.debug('market_prices.json fetch fallback:', e);
+    }
+
     if (!CSV_URL) {
       console.info('Tip: Configure DEFAULT_SHEET_CSV_URL or open with ?sheet=<CSV_URL>');
       return;

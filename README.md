@@ -1,6 +1,10 @@
 # Panimalar MBA FinTech Lab — Live Stock Ticker
 
-A lightweight, continuous scrolling stock ticker (1120x40px) displaying **Crude Oil (WTI NYMEX)**, **Gold (COMEX)**, **USD / INR**, major indices (**NIFTY 50**, **SENSEX**, etc.), and constituent stocks with **live prices via Google Finance & Google Sheets**.
+A lightweight, continuous scrolling stock ticker (1120x40px) displaying **Crude Oil (WTI NYMEX)**, **Gold (COMEX)**, **Gold Spot India (IBJA 1g 22K)**, **USD / INR**, major indices (**NIFTY 50**, **SENSEX**, etc.), and constituent stocks with **live automated prices**.
+
+### ⚡ Automated Real-Time Feeds (Zero Maintenance)
+* **Crude Oil (WTI)**, **Gold COMEX**, **Gold Spot India (22K 1g)**, and **USD / INR** are automatically fetched and updated via a scheduled **GitHub Actions workflow** (`.github/workflows/update_market_prices.yml`) running every 10 minutes.
+* **Constituent stocks and indices** continue to sync live via your published Google Sheet CSV.
 
 Designed for display on laboratory LED ticker panels, TV screens, and website embedding.
 
