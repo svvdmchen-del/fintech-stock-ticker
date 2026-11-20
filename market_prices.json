@@ -1,29 +1,29 @@
 {
-  "updated_at": "2026-11-20T14:43:26.513Z",
+  "updated_at": "2026-11-20T15:39:10.235Z",
   "assets": [
     {
       "symbol": "CRUDE OIL",
       "display_name": "CRUDE OIL",
       "ticker": "CL=F",
       "source": "NYMEX WTI",
-      "price": 81.76,
+      "price": 81.5,
       "currency": "USD",
-      "formatted_price": "$81.76",
-      "change_pct": -0.82,
+      "formatted_price": "$81.50",
+      "change_pct": -1.14,
       "change_cls": "down",
-      "change_text": "▼ 0.82%"
+      "change_text": "▼ 1.14%"
     },
     {
       "symbol": "GOLD COMEX",
       "display_name": "GOLD COMEX",
       "ticker": "GC=F",
       "source": "COMEX Gold",
-      "price": 3575.3,
+      "price": 3531.1,
       "currency": "USD",
-      "formatted_price": "$3,575.30",
-      "change_pct": -2.99,
+      "formatted_price": "$3,531.10",
+      "change_pct": -4.19,
       "change_cls": "down",
-      "change_text": "▼ 2.99%"
+      "change_text": "▼ 4.19%"
     },
     {
       "symbol": "GOLD SPOT (IND 1g 22K)",
@@ -33,9 +33,9 @@
       "price": 11349,
       "currency": "INR",
       "formatted_price": "₹11,349.00",
-      "change_pct": -2.99,
+      "change_pct": -4.19,
       "change_cls": "up",
-      "change_text": "▲ 2.99%"
+      "change_text": "▲ 4.19%"
     },
     {
       "symbol": "USD/INR",
