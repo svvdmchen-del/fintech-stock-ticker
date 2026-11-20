@@ -394,18 +394,50 @@ body{display:block}
         setSpeed();
       }
 
-      // Check if USD/INR was updated by Google Sheet
-      let usdUpdatedBySheet = false;
+      // Check if Crude, Gold, USD/INR are provided by the Google Sheet
+      let crudeUpdated = false;
+      let goldUpdated = false;
+      let usdUpdated = false;
+
       rows.forEach(item => {
-        if (!item.symbol) return;
+        if (!item.symbol || !item.price) return;
         const norm = item.symbol.toUpperCase().replace(/[\s_\-\/:]+/g, '');
-        if ((norm === 'USDINR' || norm === 'CURRENCYUSDINR') && item.price) {
-          usdUpdatedBySheet = true;
-        }
+        if (norm.includes('CRUDE') || norm.includes('CLW00')) crudeUpdated = true;
+        if (norm.includes('GOLD') || norm.includes('GCW00')) goldUpdated = true;
+        if (norm.includes('USD') || norm.includes('INR')) usdUpdated = true;
       });
 
+      // Live Gold fallback if not populated in Google Sheet
+      if (!goldUpdated) {
+        try {
+          const gRes = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT');
+          if (gRes.ok) {
+            const gData = await gRes.json();
+            if (gData && gData.lastPrice) {
+              const price = parseFloat(gData.lastPrice);
+              const chg = parseFloat(gData.priceChangePercent);
+              const formattedPrice = '$' + price.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              });
+              const changeInfo = formatChange(chg);
+              const goldEls = findElementsForSymbol('GOLD COMEX');
+              goldEls.forEach(el => {
+                const p = el.querySelector('.price');
+                if (p) p.textContent = formattedPrice;
+                const c = el.querySelector('.change');
+                if (c && changeInfo) {
+                  c.className = 'change ' + changeInfo.cls;
+                  c.textContent = changeInfo.text;
+                }
+              });
+            }
+          }
+        } catch (_) {}
+      }
+
       // Live forex fallback if not populated in Google Sheet
-      if (!usdUpdatedBySheet) {
+      if (!usdUpdated) {
         try {
           const fxRes = await fetch('https://open.er-api.com/v6/latest/USD');
           if (fxRes.ok) {
