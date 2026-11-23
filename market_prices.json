@@ -1,26 +1,26 @@
 {
-  "updated_at": "2026-11-23T11:43:05.368Z",
+  "updated_at": "2026-11-23T12:45:58.318Z",
   "assets": [
     {
       "symbol": "CRUDE OIL",
       "display_name": "CRUDE OIL",
       "ticker": "CL=F",
       "source": "NYMEX WTI",
-      "price": 81.98,
+      "price": 82.16,
       "currency": "USD",
-      "formatted_price": "$81.98",
-      "change_pct": -1.71,
+      "formatted_price": "$82.16",
+      "change_pct": -1.5,
       "change_cls": "down",
-      "change_text": "▼ 1.71%"
+      "change_text": "▼ 1.50%"
     },
     {
       "symbol": "GOLD COMEX",
       "display_name": "GOLD COMEX",
       "ticker": "GC=F",
       "source": "COMEX Gold",
-      "price": 3621,
+      "price": 3620.8,
       "currency": "USD",
-      "formatted_price": "$3,621.00",
+      "formatted_price": "$3,620.80",
       "change_pct": 3,
       "change_cls": "up",
       "change_text": "▲ 3.00%"
@@ -30,12 +30,12 @@
       "display_name": "GOLD (IND 22K)",
       "ticker": "IBJA:916_1G",
       "source": "ibjarates.com (916 Purity)",
-      "price": 11461,
+      "price": 11445,
       "currency": "INR",
-      "formatted_price": "₹11,461.00",
+      "formatted_price": "₹11,445.00",
       "change_pct": 3,
-      "change_cls": "up",
-      "change_text": "▲ 3.00%"
+      "change_cls": "down",
+      "change_text": "▼ 3.00%"
     },
     {
       "symbol": "USD/INR",
