@@ -4,7 +4,7 @@ A lightweight, continuous scrolling stock ticker (1120x40px) displaying **Crude 
 
 ### ⚡ Automated Real-Time Feeds (Zero Maintenance)
 * **Crude Oil (WTI)**, **Gold COMEX**, **Gold Spot India (22K 1g)**, and **USD / INR** are automatically fetched and updated via a scheduled **GitHub Actions workflow** (`.github/workflows/update_market_prices.yml`) running every 10 minutes.
-* **Constituent stocks and indices** continue to sync live via your published Google Sheet CSV.
+* **Constituent stocks and NIFTY 50** continue to sync live via your published Google Sheet CSV. The remaining indices (**SENSEX, NIFTY 500, and NIFTY sector indices**) are fetched automatically from **NSE India / Yahoo Finance** into `market_prices.json`.
 
 Designed for display on laboratory LED ticker panels, TV screens, and website embedding.
 
