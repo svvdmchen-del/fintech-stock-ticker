@@ -1,29 +1,29 @@
 {
-  "updated_at": "2026-11-24T10:46:49.949Z",
+  "updated_at": "2026-11-24T10:48:40.967Z",
   "assets": [
     {
       "symbol": "CRUDE OIL",
       "display_name": "CRUDE OIL",
       "ticker": "CL=F",
       "source": "NYMEX WTI",
-      "price": 80.04,
+      "price": 80.22,
       "currency": "USD",
-      "formatted_price": "$80.04",
-      "change_pct": -0.16,
-      "change_cls": "down",
-      "change_text": "▼ 0.16%"
+      "formatted_price": "$80.22",
+      "change_pct": 0.06,
+      "change_cls": "up",
+      "change_text": "▲ 0.06%"
     },
     {
       "symbol": "GOLD COMEX",
       "display_name": "GOLD COMEX",
       "ticker": "GC=F",
       "source": "COMEX Gold",
-      "price": 3624.2,
+      "price": 3624.6,
       "currency": "USD",
-      "formatted_price": "$3,624.20",
-      "change_pct": -0.74,
+      "formatted_price": "$3,624.60",
+      "change_pct": -0.73,
       "change_cls": "down",
-      "change_text": "▼ 0.74%"
+      "change_text": "▼ 0.73%"
     },
     {
       "symbol": "GOLD (IND 22K)",
@@ -33,9 +33,9 @@
       "price": 11445,
       "currency": "INR",
       "formatted_price": "₹11,445.00",
-      "change_pct": -0.74,
+      "change_pct": -0.73,
       "change_cls": "down",
-      "change_text": "▼ 0.74%"
+      "change_text": "▼ 0.73%"
     },
     {
       "symbol": "USD/INR",
@@ -48,6 +48,150 @@
       "change_pct": 0,
       "change_cls": "flat",
       "change_text": "● 0.00%"
+    },
+    {
+      "symbol": "SENSEX",
+      "display_name": "SENSEX",
+      "ticker": "^BSESN",
+      "source": "BSE via Yahoo Finance",
+      "price": 82435.99,
+      "currency": "INR",
+      "formatted_price": "₹82,435.99",
+      "change_pct": -1.77,
+      "change_cls": "down",
+      "change_text": "▼ 1.77%"
+    },
+    {
+      "symbol": "NIFTY 500",
+      "display_name": "NIFTY 500",
+      "ticker": "INDEXNSE:NIFTY_500",
+      "source": "NSE India",
+      "price": 23748.15,
+      "currency": "INR",
+      "formatted_price": "₹23,748.15",
+      "change_pct": -1.41,
+      "change_cls": "down",
+      "change_text": "▼ 1.41%"
+    },
+    {
+      "symbol": "NIFTY_AUTO",
+      "display_name": "NIFTY_AUTO",
+      "ticker": "INDEXNSE:NIFTY_AUTO",
+      "source": "NSE India",
+      "price": 28490.7,
+      "currency": "INR",
+      "formatted_price": "₹28,490.70",
+      "change_pct": -1.03,
+      "change_cls": "down",
+      "change_text": "▼ 1.03%"
+    },
+    {
+      "symbol": "NIFTY_ENERGY",
+      "display_name": "NIFTY_ENERGY",
+      "ticker": "INDEXNSE:NIFTY_ENERGY",
+      "source": "NSE India",
+      "price": 36655.1,
+      "currency": "INR",
+      "formatted_price": "₹36,655.10",
+      "change_pct": -1.78,
+      "change_cls": "down",
+      "change_text": "▼ 1.78%"
+    },
+    {
+      "symbol": "NIFTY_FIN_SERV",
+      "display_name": "NIFTY_FIN_SERV",
+      "ticker": "INDEXNSE:NIFTY_FIN_SERVICE",
+      "source": "NSE India",
+      "price": 28153.5,
+      "currency": "INR",
+      "formatted_price": "₹28,153.50",
+      "change_pct": -2.49,
+      "change_cls": "down",
+      "change_text": "▼ 2.49%"
+    },
+    {
+      "symbol": "NIFTY_FMCG",
+      "display_name": "NIFTY_FMCG",
+      "ticker": "INDEXNSE:NIFTY_FMCG",
+      "source": "NSE India",
+      "price": 48312.55,
+      "currency": "INR",
+      "formatted_price": "₹48,312.55",
+      "change_pct": -0.46,
+      "change_cls": "down",
+      "change_text": "▼ 0.46%"
+    },
+    {
+      "symbol": "NIFTY_INFRA",
+      "display_name": "NIFTY_INFRA",
+      "ticker": "INDEXNSE:NIFTY_INFRA",
+      "source": "NSE India",
+      "price": 9530.35,
+      "currency": "INR",
+      "formatted_price": "₹9,530.35",
+      "change_pct": -1.64,
+      "change_cls": "down",
+      "change_text": "▼ 1.64%"
+    },
+    {
+      "symbol": "NIFTY_IT",
+      "display_name": "NIFTY_IT",
+      "ticker": "INDEXNSE:NIFTY_IT",
+      "source": "NSE India",
+      "price": 31850.8,
+      "currency": "INR",
+      "formatted_price": "₹31,850.80",
+      "change_pct": 1.69,
+      "change_cls": "up",
+      "change_text": "▲ 1.69%"
+    },
+    {
+      "symbol": "NIFTY_MEDIA",
+      "display_name": "NIFTY_MEDIA",
+      "ticker": "INDEXNSE:NIFTY_MEDIA",
+      "source": "NSE India",
+      "price": 1749.2,
+      "currency": "INR",
+      "formatted_price": "₹1,749.20",
+      "change_pct": -0.37,
+      "change_cls": "down",
+      "change_text": "▼ 0.37%"
+    },
+    {
+      "symbol": "NIFTY_METAL",
+      "display_name": "NIFTY_METAL",
+      "ticker": "INDEXNSE:NIFTY_METAL",
+      "source": "NSE India",
+      "price": 11819.25,
+      "currency": "INR",
+      "formatted_price": "₹11,819.25",
+      "change_pct": -3.68,
+      "change_cls": "down",
+      "change_text": "▼ 3.68%"
+    },
+    {
+      "symbol": "NIFTY_PHARMA",
+      "display_name": "NIFTY_PHARMA",
+      "ticker": "INDEXNSE:NIFTY_PHARMA",
+      "source": "NSE India",
+      "price": 28288.85,
+      "currency": "INR",
+      "formatted_price": "₹28,288.85",
+      "change_pct": -0.35,
+      "change_cls": "down",
+      "change_text": "▼ 0.35%"
+    },
+    {
+      "symbol": "NIFTY_REALTY",
+      "display_name": "NIFTY_REALTY",
+      "ticker": "INDEXNSE:NIFTY_REALTY",
+      "source": "NSE India",
+      "price": 941.85,
+      "currency": "INR",
+      "formatted_price": "₹941.85",
+      "change_pct": 0.31,
+      "change_cls": "up",
+      "change_text": "▲ 0.31%"
     }
   ]
 }
