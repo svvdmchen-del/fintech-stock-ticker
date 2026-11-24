@@ -146,7 +146,7 @@ async function main() {
           change_text: gcChg.text
         },
         {
-          symbol: 'GOLD SPOT (IND 1g 22K)',
+          symbol: 'GOLD (IND 22K)',
           display_name: 'GOLD (IND 22K)',
           ticker: 'IBJA:916_1G',
           source: 'ibjarates.com (916 Purity)',
