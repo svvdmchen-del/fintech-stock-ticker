@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T22:49:02.961Z",
+  "updated_at": "2026-11-28T04:19:27.991Z",
   "assets": [
     {
       "symbol": "CRUDE OIL",
@@ -42,12 +42,12 @@
       "display_name": "USD/INR",
       "ticker": "INR=X",
       "source": "Forex Interbank",
-      "price": 92.98,
+      "price": 92.99,
       "currency": "INR",
-      "formatted_price": "₹92.98",
-      "change_pct": 0.59,
+      "formatted_price": "₹92.99",
+      "change_pct": 0.6,
       "change_cls": "up",
-      "change_text": "▲ 0.59%"
+      "change_text": "▲ 0.60%"
     },
     {
       "symbol": "SENSEX",
@@ -57,9 +57,9 @@
       "price": 83339.26,
       "currency": "INR",
       "formatted_price": "₹83,339.26",
-      "change_pct": -0.71,
+      "change_pct": -1.17,
       "change_cls": "down",
-      "change_text": "▼ 0.71%"
+      "change_text": "▼ 1.17%"
     },
     {
       "symbol": "NIFTY 500",
